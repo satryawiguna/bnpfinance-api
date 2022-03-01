@@ -24,7 +24,7 @@ class PaymentPolicy
 
     public function view_by_admin(User $user)
     {
-        return $user->role_id === 1;
+        return $user->role_id == 1;
     }
 
     public function view(User $user, $paymentId)
@@ -45,16 +45,16 @@ class PaymentPolicy
 
     public function create(User $user)
     {
-        return $user->role_id === 1;
+        return $user->role_id == 1;
     }
 
     public function update(User $user)
     {
-        return $user->role_id === 1;
+        return $user->role_id == 1;
     }
 
     public function delete(User $user)
     {
-        return $user->role_id === 1;
+        return $user->role_id == 1;
     }
 }

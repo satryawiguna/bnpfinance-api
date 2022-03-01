@@ -265,7 +265,7 @@ class UserController extends Controller
 
     public function actionUserLoans($id)
     {
-        if (!Auth::user()->can('view', [Loan::class, $id])) {
+        if (!Auth::user()->can('view_by_customer', [Loan::class, $id])) {
             return $this->responseUnauthorized();
         }
 

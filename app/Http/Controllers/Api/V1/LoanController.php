@@ -78,7 +78,7 @@ class LoanController extends Controller
             ])->get();
 
             if ($loan->count() > 0)
-                return $this->responseUnprocessable(new MessageBag(['There loan status debt']));
+                return $this->responseUnprocessable(new MessageBag(['There loan status debt', $loan[0]->id]));
 
             // Store into loan
             $loan = new Loan([

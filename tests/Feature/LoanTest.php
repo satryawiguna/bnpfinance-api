@@ -81,7 +81,7 @@ class LoanTest extends TestCase
     /**
      * @test
      */
-    public function a_user_admin_can_create_a_loan()
+    public function a_user_admin_can_create_if_there_nothing_a_loan_exist()
     {
         $this->seed(RoleSeeder::class);
         $this->seed(UserSeeder::class);
@@ -98,6 +98,28 @@ class LoanTest extends TestCase
         $loanStartDate = $this->faker->date();
         $interest = (rand(1, 5) / 100);
 
+        $response = $this->actingAs($user, 'api')->post(route('api.loan_store'), [
+            'user_id' => $userSample->id,
+            'principal' => $principal,
+            'installment' => ($principal / ($period * 12)) + ((($interest / 100) / 12) * ($principal / ($period * 12))),
+            'loan_start_date' => $loanStartDate,
+            'loan_end_date' => Carbon::parse($loanStartDate)->addYears($period)->format('Y-m-d'),
+            'period' => $period,
+            'interest' => $interest
+        ]);
+
+        $content = json_decode($response->content());
+
+        $response->assertStatus(422);
+
+        // Know try to update status a loan to be paid off
+        $response = $this->actingAs($user, 'api')->put(route('api.loan_update_to_paid', [
+            'id' => $content->errors[1][0]
+        ]));
+
+        $response->assertStatus(200);
+
+        // Know try to create loan then
         $response = $this->actingAs($user, 'api')->post(route('api.loan_store'), [
             'user_id' => $userSample->id,
             'principal' => $principal,
