@@ -1,0 +1,123 @@
+version: "3.8"
+
+services:
+  app:
+    build:
+      context: ./
+      dockerfile: Dockerfile
+    container_name: bnpfinance_app
+    restart: unless-stopped
+    tty: true
+    working_dir: /var/www
+    volumes:
+      - ./:/var/www
+      - ./php/local.ini:/usr/local/etc/php/app.conf/local.ini
+    env_file:
+      - .env
+    environment:
+      - APP_NAME=BnPFinance
+      - APP_URL=http://localhost:8484
+      - DB_CONNECTION=mysql
+      - DB_HOST=bnpfinance_mysql
+      - DB_PORT=3306
+      - DB_DATABASE=bnpfinance
+      - DB_USERNAME=root
+      - DB_PASSWORD=secret
+      - DB_PREFIX=bnpf_
+      - DB_CONNECTION_TEST=mysql_test
+      - DB_HOST_TEST=bnpfinance_mysql_test
+      - DB_PORT_TEST=3306
+      - DB_DATABASE_TEST=bnpfinance_test
+      - DB_USERNAME_TEST=root
+      - DB_PASSWORD_TEST=secret
+      - DB_PREFIX_TEST=bnpf_
+      - MAIL_MAILER=smtp
+      - MAIL_HOST=smtp.mailtrap.io
+      - MAIL_PORT=2525
+      - MAIL_USERNAME=ba76affb181f58
+      - MAIL_PASSWORD=afff44dfd36493
+      - MAIL_ENCRYPTION=tls
+      - MAIL_FROM_ADDRESS=noreply@bnpfinance.test
+      - MAIL_FROM_NAME="${APP_NAME}"
+    depends_on:
+      - server
+      - database
+      - database-test
+    networks:
+      - bnpfinance_network
+
+  server:
+    build:
+      context: ./
+      dockerfile: Dockerfile_server
+    container_name: bnpfinance_server
+    restart: unless-stopped
+    tty: true
+    ports:
+      - "8484:80"
+      - "543:443"
+    volumes:
+      - ./:/var/www
+    networks:
+      - bnpfinance_network
+
+  database:
+    image: mysql:5.7.22
+    container_name: bnpfinance_mysql
+    restart: unless-stopped
+    tty: true
+    ports:
+      - "4306:3306"
+    volumes:
+      - dbdata:/var/lib/mysql/
+      - ./mysql/my.cnf:/etc/mysql/my.cnf
+    environment:
+      # get .env ref use ${DB_DATABASE}
+      - MYSQL_DATABASE=bnpfinance
+      # get .env ref use ${DB_PASSWORD}
+      - MYSQL_ROOT_PASSWORD=secret
+      # get .env ref use ${DB_PASSWORD}
+      - MYSQL_PASSWORD=secret
+      # get .env ref use ${DB_USERNAME}
+      - MYSQL_USER=root
+      - SERVICE_TAGS=dev
+      - SERVICE_NAME=mysql
+    networks:
+      - bnpfinance_network
+
+  database-test:
+    image: mysql:5.7.22
+    container_name: bnpfinance_mysql_test
+    restart: unless-stopped
+    tty: true
+    ports:
+      - "5306:3306"
+    volumes:
+      - dbdata_test:/var/lib/mysql/
+      - ./mysql/my.cnf:/etc/mysql/my.cnf
+    environment:
+      # get .env ref use ${DB_DATABASE}
+      - MYSQL_DATABASE=bnpfinance_test
+      # get .env ref use ${DB_PASSWORD}
+      - MYSQL_ROOT_PASSWORD=secret
+      # get .env ref use ${DB_PASSWORD}
+      - MYSQL_PASSWORD=secret
+      # get .env ref use ${DB_USERNAME}
+      - MYSQL_USER=root
+      - SERVICE_TAGS=dev
+      - SERVICE_NAME=mysql
+    depends_on:
+      - database
+    networks:
+      - bnpfinance_network
+
+networks:
+  bnpfinance_network:
+    name: bnpfinance_network
+    driver: bridge
+
+volumes:
+  dbdata:
+    driver: local
+  dbdata_test:
+    driver: local
