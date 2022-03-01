@@ -1,0 +1,821 @@
+{
+	"info": {
+		"_postman_id": "ab09c385-9510-4da6-9e6b-2777187c0cd3",
+		"name": "BnPFinance",
+		"schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json"
+	},
+	"item": [
+		{
+			"name": "Auth",
+			"item": [
+				{
+					"name": "Auth/Login",
+					"request": {
+						"method": "POST",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "{\n    \"identity\": \"admin@loopit.co\",\n    \"password\": \"12345678\"\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "{{url}}/api/auth/login",
+							"host": [
+								"{{url}}"
+							],
+							"path": [
+								"api",
+								"auth",
+								"login"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Register/Member",
+					"request": {
+						"method": "POST",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "{\n    \"nick_name\": \"Satrya\",\n    \"full_name\": \"Satrya Wiguna\",\n    \"username\": \"satryawiguna\",\n    \"email\": \"satrya@freshcms.net\",\n    \"password\": \"12345678\",\n    \"password_confirmation\": \"12345678\"\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "{{url}}/api/register/member",
+							"host": [
+								"{{url}}"
+							],
+							"path": [
+								"api",
+								"register",
+								"member"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Auth/Logout",
+					"request": {
+						"method": "POST",
+						"header": [
+							{
+								"key": "Content-Type",
+								"value": "application/json",
+								"type": "default"
+							},
+							{
+								"key": "Accept",
+								"value": "application/json",
+								"type": "default"
+							},
+							{
+								"key": "Authorization",
+								"value": "{{token}}",
+								"type": "default"
+							}
+						],
+						"body": {
+							"mode": "raw",
+							"raw": "{\n    \"email\": \"admin@trutrip.com\"\n}"
+						},
+						"url": {
+							"raw": "{{url}}/api/auth/logout",
+							"host": [
+								"{{url}}"
+							],
+							"path": [
+								"api",
+								"auth",
+								"logout"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Password/Email",
+					"request": {
+						"method": "POST",
+						"header": [
+							{
+								"key": "Content-Type",
+								"value": "application/json",
+								"type": "default"
+							},
+							{
+								"key": "Accept",
+								"value": "application/json",
+								"type": "default"
+							}
+						],
+						"body": {
+							"mode": "raw",
+							"raw": "{\n    \"email\": \"satrya@freshcms.net\"\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "{{url}}/api/password/email",
+							"host": [
+								"{{url}}"
+							],
+							"path": [
+								"api",
+								"password",
+								"email"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Me",
+					"request": {
+						"method": "GET",
+						"header": [
+							{
+								"key": "Content-Type",
+								"value": "application/json",
+								"type": "default"
+							},
+							{
+								"key": "Accept",
+								"value": "application/json",
+								"type": "default"
+							}
+						],
+						"url": {
+							"raw": "{{url}}/api/auth/me",
+							"host": [
+								"{{url}}"
+							],
+							"path": [
+								"api",
+								"auth",
+								"me"
+							]
+						}
+					},
+					"response": []
+				}
+			]
+		},
+		{
+			"name": "Membership",
+			"item": [
+				{
+					"name": "Profile/Me",
+					"protocolProfileBehavior": {
+						"disableBodyPruning": true
+					},
+					"request": {
+						"method": "GET",
+						"header": [
+							{
+								"key": "Content-Type",
+								"value": "application/json",
+								"type": "default"
+							},
+							{
+								"key": "Accept",
+								"value": "application/json",
+								"type": "default"
+							},
+							{
+								"key": "Authorization",
+								"value": "{{token}}",
+								"type": "default"
+							}
+						],
+						"body": {
+							"mode": "raw",
+							"raw": ""
+						},
+						"url": {
+							"raw": "{{url}}/api/profile/me",
+							"host": [
+								"{{url}}"
+							],
+							"path": [
+								"api",
+								"profile",
+								"me"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Profile/Me/Update",
+					"request": {
+						"method": "PUT",
+						"header": [
+							{
+								"key": "Content-Type",
+								"value": "application/json",
+								"type": "default"
+							},
+							{
+								"key": "Authorization",
+								"value": "Bearer eyJ0eXAiOiJKV1QiLCJhbGciOiJSUzI1NiJ9.eyJhdWQiOiI5NTVmZjA5Yi1lN2Q3LTQ3NDItOGYyNy02NWNmMDE3YjM5NzIiLCJqdGkiOiJmZjhjN2RmM2Q5ZWI2M2Q4YWNkMmU2NGJkYzUwMWE1Y2VlYjY5ODUzNTZmMDU2NWMzMWE0MDQxY2IwN2Q3NGFhNDlmZGFmOGZkNDU3ZmJmYyIsImlhdCI6MTY0MjM5NTY1NS45MzI1NjUsIm5iZiI6MTY0MjM5NTY1NS45MzI1NzQsImV4cCI6MTY3MzkzMTY1NS45MjY4NjMsInN1YiI6Ijk5M2UwNWZlLTE1MTAtNDBlOS1iM2JiLWFkNjhkNDY5ZDY0YSIsInNjb3BlcyI6W119.CR6ujn9PGvrPvfBibTqMksRUWWleODYU_UzwcKa4OE1PpfvJ3yQ3srn4IHuPKYAlPRxXDP4quPinw4KtdOh7IrANnaeFGgi-yIMMW-aVbmzMSztktG-zDEHgi38_NaBW2sFtbFPvziJikjAUEzYLRXptcLO5qzc4HdOTMZ1-PqtEklUVq_if0Y7KZf2_VGVk2BS1z50fOnKLxaqaIr6eZYoEVZ6NMHzessoRVdOb52DfZDePs3XguOEnARs9QXOdHVd4RnyYlR1lvTHXY7YBAGF1mc0gMmiudONvr_H-SzTHGHml9ehxOKh_fdMrmr_p54LoBnD40Ehd_Z0k35VqsxhxIGtNzpcWUgeFxDLS8sbN_cmJTMJ1eI1_FGbG_RS1VEjI6HbPrXJ-8K5KtuqgjNBHvrQoaGpkBNwQ7-pKSQ_jFvnSG2LwPqr5fqruM5j2okHfbl_2vF_gvxrrCq3bdx3J6LXRjrpF4f6GPoYGvw63ucrG3OjWKSFFIWi-oTnyQr5BuO9x2g_GhlWSFmVwnHx0TcarUfrSEwzqtlJR9xAp0ohogLe646NAQsrq3j9tcPJEA22SvW6mlGTOxHVOR8NNXieG9t3dA-aukz5lWxVAz0LU3Zzu0Kd4NMmbC3wg4YhGP1xIfqBIk_5AhsZ5A2QOySINVG5vg2rgCFuQCgE",
+								"type": "default"
+							}
+						],
+						"body": {
+							"mode": "raw",
+							"raw": "{\n    \"nick_name\": \"_Satrya\",\n    \"full_name\": \"_Satrya _Wiguna\",\n    \"post_code\": \"12345\",\n    \"country\": \"Indonesia\",\n    \"state\": \"Bali\",\n    \"city\": \"Gianyar\",\n    \"address\": \"Jl. Kresna Gg Ia\",\n    \"mobile\": \"1234567890\"\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "{{url}}/api/profile/me/update",
+							"host": [
+								"{{url}}"
+							],
+							"path": [
+								"api",
+								"profile",
+								"me",
+								"update"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Photo/Me/Update",
+					"request": {
+						"method": "POST",
+						"header": [
+							{
+								"warning": "This is a duplicate header and will be overridden by the Content-Type header generated by Postman.",
+								"key": "Content-Type",
+								"value": "application/json",
+								"type": "default"
+							},
+							{
+								"key": "Authorization",
+								"value": "Bearer eyJ0eXAiOiJKV1QiLCJhbGciOiJSUzI1NiJ9.eyJhdWQiOiI5NTVmZjA5Yi1lN2Q3LTQ3NDItOGYyNy02NWNmMDE3YjM5NzIiLCJqdGkiOiJmZjhjN2RmM2Q5ZWI2M2Q4YWNkMmU2NGJkYzUwMWE1Y2VlYjY5ODUzNTZmMDU2NWMzMWE0MDQxY2IwN2Q3NGFhNDlmZGFmOGZkNDU3ZmJmYyIsImlhdCI6MTY0MjM5NTY1NS45MzI1NjUsIm5iZiI6MTY0MjM5NTY1NS45MzI1NzQsImV4cCI6MTY3MzkzMTY1NS45MjY4NjMsInN1YiI6Ijk5M2UwNWZlLTE1MTAtNDBlOS1iM2JiLWFkNjhkNDY5ZDY0YSIsInNjb3BlcyI6W119.CR6ujn9PGvrPvfBibTqMksRUWWleODYU_UzwcKa4OE1PpfvJ3yQ3srn4IHuPKYAlPRxXDP4quPinw4KtdOh7IrANnaeFGgi-yIMMW-aVbmzMSztktG-zDEHgi38_NaBW2sFtbFPvziJikjAUEzYLRXptcLO5qzc4HdOTMZ1-PqtEklUVq_if0Y7KZf2_VGVk2BS1z50fOnKLxaqaIr6eZYoEVZ6NMHzessoRVdOb52DfZDePs3XguOEnARs9QXOdHVd4RnyYlR1lvTHXY7YBAGF1mc0gMmiudONvr_H-SzTHGHml9ehxOKh_fdMrmr_p54LoBnD40Ehd_Z0k35VqsxhxIGtNzpcWUgeFxDLS8sbN_cmJTMJ1eI1_FGbG_RS1VEjI6HbPrXJ-8K5KtuqgjNBHvrQoaGpkBNwQ7-pKSQ_jFvnSG2LwPqr5fqruM5j2okHfbl_2vF_gvxrrCq3bdx3J6LXRjrpF4f6GPoYGvw63ucrG3OjWKSFFIWi-oTnyQr5BuO9x2g_GhlWSFmVwnHx0TcarUfrSEwzqtlJR9xAp0ohogLe646NAQsrq3j9tcPJEA22SvW6mlGTOxHVOR8NNXieG9t3dA-aukz5lWxVAz0LU3Zzu0Kd4NMmbC3wg4YhGP1xIfqBIk_5AhsZ5A2QOySINVG5vg2rgCFuQCgE",
+								"type": "default"
+							}
+						],
+						"body": {
+							"mode": "formdata",
+							"formdata": [
+								{
+									"key": "id",
+									"value": "8a18d9df-ed91-4dee-b5a0-650dfcbceab9",
+									"type": "default"
+								},
+								{
+									"key": "photo",
+									"type": "file",
+									"src": []
+								}
+							]
+						},
+						"url": {
+							"raw": "{{url}}/api/profile/photo/update",
+							"host": [
+								"{{url}}"
+							],
+							"path": [
+								"api",
+								"profile",
+								"photo",
+								"update"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Users",
+					"protocolProfileBehavior": {
+						"disableBodyPruning": true
+					},
+					"request": {
+						"method": "GET",
+						"header": [
+							{
+								"key": "Content-Type",
+								"value": "application/json",
+								"type": "default"
+							},
+							{
+								"key": "Authorization",
+								"value": "{{token}}",
+								"type": "default"
+							},
+							{
+								"key": "Accept",
+								"value": "application/json",
+								"type": "default"
+							}
+						],
+						"body": {
+							"mode": "raw",
+							"raw": "{\n    // \"role_id\": 1,\n    // \"email\": \"satrya\",\n    // \"full_name\": \"satrya\"\n}"
+						},
+						"url": {
+							"raw": "{{url}}/api/users/",
+							"host": [
+								"{{url}}"
+							],
+							"path": [
+								"api",
+								"users",
+								""
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "User/{id}",
+					"protocolProfileBehavior": {
+						"disableBodyPruning": true
+					},
+					"request": {
+						"method": "GET",
+						"header": [
+							{
+								"key": "Content-Type",
+								"value": "application/json",
+								"type": "default"
+							},
+							{
+								"key": "Authorization",
+								"value": "{{token}}",
+								"type": "default"
+							},
+							{
+								"key": "Accept",
+								"value": "application/json",
+								"type": "default"
+							}
+						],
+						"body": {
+							"mode": "raw",
+							"raw": ""
+						},
+						"url": {
+							"raw": "{{url}}/api/user/0348fdd3-b94f-4a30-af25-a936b1e1c6ae",
+							"host": [
+								"{{url}}"
+							],
+							"path": [
+								"api",
+								"user",
+								"0348fdd3-b94f-4a30-af25-a936b1e1c6ae"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "User/{id}/Update",
+					"request": {
+						"method": "PUT",
+						"header": [
+							{
+								"key": "Content-Type",
+								"value": "application/json",
+								"type": "default"
+							},
+							{
+								"key": "Authorization",
+								"value": "{{token}}",
+								"type": "default"
+							},
+							{
+								"key": "Accept",
+								"value": "application/json",
+								"type": "default"
+							}
+						],
+						"body": {
+							"mode": "raw",
+							"raw": "{\n    \"role_id\": 2,\n    \"nick_name\": \"_Erna_\",\n    \"full_name\": \"_Erna Widhiastuti_\",\n    \"username\": \"_ernawidhiastuti_\",\n    \"email\": \"_erna@freshcms.net_\",\n    \"password\": \"12345678\",\n    \"password_confirmation\": \"12345678\"\n}"
+						},
+						"url": {
+							"raw": "{{url}}/api/user/4fced176-969b-4821-9666-10291d50bc01/update",
+							"host": [
+								"{{url}}"
+							],
+							"path": [
+								"api",
+								"user",
+								"4fced176-969b-4821-9666-10291d50bc01",
+								"update"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "User/Store",
+					"request": {
+						"method": "POST",
+						"header": [
+							{
+								"key": "Content-Type",
+								"value": "application/json",
+								"type": "default"
+							},
+							{
+								"key": "Accept",
+								"value": "application/json",
+								"type": "default"
+							},
+							{
+								"key": "Authorization",
+								"value": "{{token}}",
+								"type": "default"
+							}
+						],
+						"body": {
+							"mode": "raw",
+							"raw": "{\n    \"nick_name\": \"Erna\",\n    \"full_name\": \"Erna Widhiastuti\",\n    \"username\": \"ernawidhiastuti\",\n    \"email\": \"erna@freshcms.net\",\n    \"password\": \"12345678\",\n    \"password_confirmation\": \"12345678\"\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "{{url}}/api/user/store",
+							"host": [
+								"{{url}}"
+							],
+							"path": [
+								"api",
+								"user",
+								"store"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "User/{id}/Delete",
+					"request": {
+						"method": "DELETE",
+						"header": [
+							{
+								"key": "Accept",
+								"value": "application/json",
+								"type": "default"
+							},
+							{
+								"key": "Content-Type",
+								"value": "application/json",
+								"type": "default"
+							},
+							{
+								"key": "Authorization",
+								"value": "{{token}}",
+								"type": "default"
+							}
+						],
+						"url": {
+							"raw": "{{url}}/api/user/4fced176-969b-4821-9666-10291d50bc01/delete",
+							"host": [
+								"{{url}}"
+							],
+							"path": [
+								"api",
+								"user",
+								"4fced176-969b-4821-9666-10291d50bc01",
+								"delete"
+							]
+						}
+					},
+					"response": []
+				}
+			]
+		},
+		{
+			"name": "Loan",
+			"item": [
+				{
+					"name": "Loans",
+					"protocolProfileBehavior": {
+						"disableBodyPruning": true
+					},
+					"request": {
+						"method": "GET",
+						"header": [
+							{
+								"key": "Content-Type",
+								"value": "application/json",
+								"type": "default"
+							},
+							{
+								"key": "Accept",
+								"value": "application/json",
+								"type": "default"
+							}
+						],
+						"body": {
+							"mode": "raw",
+							"raw": "{\n    \n}"
+						},
+						"url": {
+							"raw": "{{url}}/api/loans",
+							"host": [
+								"{{url}}"
+							],
+							"path": [
+								"api",
+								"loans"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Loan/{id}",
+					"protocolProfileBehavior": {
+						"disableBodyPruning": true
+					},
+					"request": {
+						"method": "GET",
+						"header": [
+							{
+								"key": "Content-Type",
+								"value": "application/json",
+								"type": "default"
+							},
+							{
+								"key": "Authorization",
+								"value": "{{token}}",
+								"type": "default"
+							},
+							{
+								"key": "Accept",
+								"value": "application/json",
+								"type": "default"
+							}
+						],
+						"body": {
+							"mode": "raw",
+							"raw": ""
+						},
+						"url": {
+							"raw": "{{url}}/api/loan/1",
+							"host": [
+								"{{url}}"
+							],
+							"path": [
+								"api",
+								"loan",
+								"1"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Loans/Store",
+					"request": {
+						"method": "POST",
+						"header": [
+							{
+								"key": "Content-Type",
+								"value": "application/json",
+								"type": "default"
+							},
+							{
+								"key": "Accept",
+								"value": "application/json",
+								"type": "default"
+							},
+							{
+								"key": "Authorization",
+								"value": "{{token}}",
+								"type": "default"
+							}
+						],
+						"body": {
+							"mode": "raw",
+							"raw": "{\n    \"name\": \"Category 1\"\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "{{url}}/api/loan/store",
+							"host": [
+								"{{url}}"
+							],
+							"path": [
+								"api",
+								"loan",
+								"store"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Loans/{id}/Payments",
+					"protocolProfileBehavior": {
+						"disableBodyPruning": true
+					},
+					"request": {
+						"method": "GET",
+						"header": [
+							{
+								"key": "Content-Type",
+								"value": "application/json",
+								"type": "default"
+							},
+							{
+								"key": "Accept",
+								"value": "application/json",
+								"type": "default"
+							}
+						],
+						"body": {
+							"mode": "raw",
+							"raw": "",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "{{url}}/api/loan/1/payments",
+							"host": [
+								"{{url}}"
+							],
+							"path": [
+								"api",
+								"loan",
+								"1",
+								"payments"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Loan/{id}/Update",
+					"request": {
+						"method": "PUT",
+						"header": [
+							{
+								"key": "Content-Type",
+								"value": "application/json",
+								"type": "default"
+							},
+							{
+								"key": "Accept",
+								"value": "application/json",
+								"type": "default"
+							},
+							{
+								"key": "Authorization",
+								"value": "{{token}}",
+								"type": "default"
+							}
+						],
+						"body": {
+							"mode": "raw",
+							"raw": "{\n    \"name\": \"Category 1.1\"\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "{{url}}/api/loan/11/update",
+							"host": [
+								"{{url}}"
+							],
+							"path": [
+								"api",
+								"loan",
+								"11",
+								"update"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Loan/{id}/UpdateToPaid",
+					"request": {
+						"method": "PUT",
+						"header": [
+							{
+								"key": "Content-Type",
+								"value": "application/json",
+								"type": "default"
+							},
+							{
+								"key": "Accept",
+								"value": "application/json",
+								"type": "default"
+							},
+							{
+								"key": "Authorization",
+								"value": "{{token}}",
+								"type": "default"
+							}
+						],
+						"body": {
+							"mode": "raw",
+							"raw": "{\n    \"name\": \"Category 1.1\"\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "{{url}}/api/loan/1/updateToPaid",
+							"host": [
+								"{{url}}"
+							],
+							"path": [
+								"api",
+								"loan",
+								"1",
+								"updateToPaid"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Loan/{id}/Delete",
+					"request": {
+						"method": "DELETE",
+						"header": [
+							{
+								"key": "Content-Type",
+								"value": "application/json",
+								"type": "default"
+							},
+							{
+								"key": "Accept",
+								"value": "application/json",
+								"type": "default"
+							},
+							{
+								"key": "Authorization",
+								"value": "{{token}}",
+								"type": "default"
+							}
+						],
+						"body": {
+							"mode": "raw",
+							"raw": "",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "{{url}}/api/loan/11/delete",
+							"host": [
+								"{{url}}"
+							],
+							"path": [
+								"api",
+								"loan",
+								"11",
+								"delete"
+							]
+						}
+					},
+					"response": []
+				}
+			]
+		}
+	]
+}
